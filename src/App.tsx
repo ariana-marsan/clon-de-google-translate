@@ -1,12 +1,14 @@
 import { useStore } from './hooks/useStore.ts';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col } from 'react-bootstrap';
-import { autoLanguage } from './constants/constants.ts';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import { autoLanguage } from './constants.ts';
+import { LanguageSelector } from './components/LanguageSelector.tsx';
+
 
 function App() {
 
-  const { fromLang, setFromLang, toLang, interchangeLang } = useStore()
+  const { fromLang, setFromLang, toLang, interchangeLang, setToLang } = useStore()
   console.log(fromLang)
 
   return (
@@ -14,14 +16,20 @@ function App() {
     <h1>Google Translate</h1>
     <Row>
       <Col>
-        <h2>From</h2>
+        <LanguageSelector 
+        type='from' 
+        value={fromLang}
+        onChange={setFromLang}  />
         {fromLang}
       </Col>
       <Col>
-       <button onClick={(interchangeLang)} disabled={fromLang === autoLanguage} ><i className="fa-solid fa-right-left"></i></button>
+       <Button variant="link" onClick={(interchangeLang)} disabled={fromLang === autoLanguage} ><i className="fa-solid fa-right-left"></i></Button>
       </Col>
       <Col>
-        <h2>To</h2>
+        <LanguageSelector  
+        type='to' 
+        value={toLang}
+        onChange={setToLang} />
         {toLang}
       </Col>
     </Row>

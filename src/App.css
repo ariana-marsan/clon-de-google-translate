@@ -12,16 +12,7 @@ html {
     height: 40vh;
     border: 1px solid transparent;
     border-radius: 1rem;
-    background-color: #333;
-    color: whitesmoke;
     padding: 20px;
 }
 
-.container *{
-    background-color: transparent;
-    justify-content: space-between;
-}
 
-.container button{
-    background-color: #ccc9;
-}
