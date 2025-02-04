@@ -1,0 +1,27 @@
+
+html {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.container{
+    justify-content: space-between;
+    height: 40vh;
+    border: 1px solid transparent;
+    border-radius: 1rem;
+    background-color: #333;
+    color: whitesmoke;
+    padding: 20px;
+}
+
+.container *{
+    background-color: transparent;
+    justify-content: space-between;
+}
+
+.container button{
+    background-color: #ccc9;
+}
