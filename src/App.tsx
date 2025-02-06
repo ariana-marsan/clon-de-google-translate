@@ -1,14 +1,16 @@
 import { useStore } from './hooks/useStore.ts';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col, Button } from 'react-bootstrap';
-import { autoLanguage } from './constants.ts';
+import { Container, Row, Col, Button, Form, Stack } from 'react-bootstrap';
+import { AUTO_LANGUAGE } from './constants.ts';
 import { LanguageSelector } from './components/LanguageSelector.tsx';
+import { SectionType } from './types.d.ts';
+import { TextArea } from './components/TextArea.tsx';
 
 
 function App() {
 
-  const { fromLang, setFromLang, toLang, interchangeLang, setToLang } = useStore()
+  const { fromLang, setFromLang, toLang, interchangeLang, setToLang, fromText, result, setFromText, setResult, loading } = useStore()
   console.log(fromLang)
 
   return (
@@ -16,21 +18,25 @@ function App() {
     <h1>Google Translate</h1>
     <Row>
       <Col>
+      <Stack gap={2}>
         <LanguageSelector 
-        type='from' 
+        type= {SectionType.From}
         value={fromLang}
         onChange={setFromLang}  />
-        {fromLang}
+        <TextArea type={SectionType.From} value={fromText} onChange={setFromText} loading={loading}/>
+      </Stack>
+      </Col>
+      <Col xs='auto'>
+       <Button variant="link" onClick={(interchangeLang)} disabled={fromLang === AUTO_LANGUAGE} ><i className="fa-solid fa-right-left"></i></Button>
       </Col>
       <Col>
-       <Button variant="link" onClick={(interchangeLang)} disabled={fromLang === autoLanguage} ><i className="fa-solid fa-right-left"></i></Button>
-      </Col>
-      <Col>
+        <Stack gap={2}>
         <LanguageSelector  
-        type='to' 
+        type= {SectionType.To} 
         value={toLang}
         onChange={setToLang} />
-        {toLang}
+        <TextArea type={SectionType.To} value={result} onChange={setResult} loading={loading} />
+        </Stack>
       </Col>
     </Row>
     </Container>
